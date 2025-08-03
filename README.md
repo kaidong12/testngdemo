@@ -47,6 +47,78 @@ C:\tools\apache-maven-3.9.11\conf\settings.xml
 
 --------------------------------------------------------------------
 # pom
+## cucumber
+### runner
+```java
+src/test/java/runner/TestRunner.java
+--------------------------------------------------------------------
+package runner;
+
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.AfterSuite;
+import utils.WebDriverManager;
+
+@CucumberOptions(
+    features = "src/test/java/features",
+    glue = "steps",
+    plugin = {
+        "pretty",
+        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+        "html:target/cucumber-reports.html",
+        "json:target/cucumber.json"
+    }
+)
+public class TestRunner extends AbstractTestNGCucumberTests {
+    @AfterSuite
+    public void tearDown() {
+        WebDriverManager.quitDriver();
+    }
+}
+```
+
+--------------------------------------------------------------------
+### pom-->dependency
+```java
+<cucumber.version>7.15.0</cucumber.version>
+<testng.version>7.8.0</testng.version>
+
+--------------------------------------------------------------------
+<!-- Cucumber -->  
+<dependency>  
+  <groupId>io.cucumber</groupId>  
+  <artifactId>cucumber-java</artifactId>  
+  <version>${cucumber.version}</version>  
+</dependency>  
+<!-- TestNG -->  
+<dependency>  
+  <groupId>org.testng</groupId>  
+  <artifactId>testng</artifactId>  
+  <version>${testng.version}</version>  
+</dependency>  
+<!-- cucumber-testng -->  
+<dependency>  
+  <groupId>io.cucumber</groupId>  
+  <artifactId>cucumber-testng</artifactId>  
+  <version>${cucumber.version}</version>  
+</dependency>
+
+```
+--------------------------------------------------------------------
+### pom-->plugins
+```java
+ <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<version>3.1.2</version>
+	<configuration>
+	  <suiteXmlFiles>
+		<suiteXmlFile>testng.xml</suiteXmlFile>
+	  </suiteXmlFiles>
+</plugin>
+
+```
+--------------------------------------------------------------------
 
 ## allure
 ### allure.properties

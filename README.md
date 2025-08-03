@@ -115,6 +115,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 	  <suiteXmlFiles>
 		<suiteXmlFile>testng.xml</suiteXmlFile>
 	  </suiteXmlFiles>
+    </configuration>
 </plugin>
 
 ```

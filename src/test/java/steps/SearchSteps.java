@@ -9,7 +9,7 @@ import utils.WebDriverManager;
 
 import java.util.List;
 
-public class BaiduSearchSteps {
+public class SearchSteps {
     private WebDriver driver;
 
     @Given("I start browser")
@@ -19,6 +19,11 @@ public class BaiduSearchSteps {
 
     @Given("I open Baidu homepage")
     public void iOpenBaiduHomepage() {
+        driver.get("https://www.baidu.com");
+    }
+
+    @Given("I open Bing homepage")
+    public void iOpenBingHomepage() {
         driver.get("https://www.baidu.com");
     }
 
